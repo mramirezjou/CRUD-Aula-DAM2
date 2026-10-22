@@ -1,0 +1,5 @@
+CREATE TABLE Profesors (
+      id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+      nom VARCHAR2(30),
+      cognoms VARCHAR2(30)
+);
