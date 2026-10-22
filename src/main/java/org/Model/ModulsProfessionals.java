@@ -1,4 +1,5 @@
-public class ModulProfessional {
+package org.Model;
+public class ModulsProfessionals {
     private int id_modul;
-    private int_professor;
+    private int int_professor;
 }
