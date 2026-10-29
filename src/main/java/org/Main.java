@@ -1,10 +1,21 @@
-package main.java.org;
+package org;
 
+import org.BD.Utils;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        try (Connection connexio = Utils.getConnection()) {
+            if (connexio != null && !connexio.isClosed()) {
+                System.out.println("Connexió establerta amb èxit a la BD DAM2!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en connectar amb la BD: " + e.getMessage());
+        }
 
         Scanner input = new Scanner(System.in);
 
@@ -13,7 +24,6 @@ public class Main {
         boolean sortir = false;
 
         while (!sortir) {
-
             System.out.println("\n--- MENU PRINCIPAL ---");
             System.out.println("1. Gestionar professors");
             System.out.println("2. Gestionar moduls professionals");
@@ -23,11 +33,9 @@ public class Main {
             opcio1 = input.nextInt();
 
             switch (opcio1) {
-
                 case 1:
-                    System.out.println("\n--- GESTIONAR PROFESSORS ---");
-
                     do {
+                        System.out.println("\n--- GESTIONAR PROFESSORS ---");
                         System.out.println("1. Alta");
                         System.out.println("2. Llistar");
                         System.out.println("3. Actualitzar");
@@ -51,20 +59,16 @@ public class Main {
                                 System.out.println("Eliminar professors");
                                 break;
                             case 5:
-                                System.out.println("Tornant al menu principal...");
                                 break;
                             default:
                                 System.out.println("Opcio incorrecta");
                         }
-
                     } while (opcio2 != 5);
-
                     break;
 
                 case 2:
-                    System.out.println("\n--- GESTIONAR MODULS PROFESSIONALS ---");
-
                     do {
+                        System.out.println("\n--- GESTIONAR MODULS PROFESSIONALS ---");
                         System.out.println("1. Alta");
                         System.out.println("2. Llistar");
                         System.out.println("3. Actualitzar");
@@ -88,14 +92,11 @@ public class Main {
                                 System.out.println("Eliminar moduls professionals");
                                 break;
                             case 5:
-                                System.out.println("Tornant al menu principal...");
                                 break;
                             default:
                                 System.out.println("Opcio incorrecta");
                         }
-
                     } while (opcio2 != 5);
-
                     break;
 
                 case 3:
