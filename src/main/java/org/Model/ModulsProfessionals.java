@@ -1,4 +1,4 @@
-public class ModulsProfessionals {
+public class ModulProfessional {
     private int id_modul;
-    private int int_professor;
+    private int_professor;
 }

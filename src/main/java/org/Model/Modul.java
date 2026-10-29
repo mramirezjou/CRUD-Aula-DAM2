@@ -1,3 +1,4 @@
+package org.Model;
 public class Modul{
     private int id;
     private String nom;

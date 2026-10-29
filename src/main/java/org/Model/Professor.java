@@ -1,3 +1,5 @@
+package org.Model;
+
 public class Professor{
     private String nom;
     private String cognom;
