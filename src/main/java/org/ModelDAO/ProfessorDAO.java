@@ -1,5 +1,7 @@
 package org.ModelDAO;
 
-public class ProfessorDAO{
+import org.Model.Professor;
 
+public interface ProfessorDAO {
+    void addDam2(Professor professor);
 }

@@ -1,27 +1,74 @@
+
 package org;
 
 import org.BD.Utils;
+import org.ModelView.ProfesorsView;
+
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Main {
+
+    public static boolean existeixTaula(Connection connexio, String taula) throws SQLException {
+        DatabaseMetaData meta = connexio.getMetaData();
+
+        try (ResultSet rs = meta.getTables(null, null, taula.toUpperCase(), null)) {
+            return rs.next();
+        }
+    }
+
+
+    public static void executarCrud(Connection connexio) throws Exception {
+        String script = Files.readString(
+                Path.of("src/main/java/org/BD/crud.sql")
+        );
+
+        for (String sql : script.split(";")) {
+            sql = sql.trim();
+
+            if (!sql.isEmpty()) {
+                try (Statement st = connexio.createStatement()) {
+                    st.execute(sql);
+                } catch (SQLException e) {
+                    System.out.println("Error en aquesta sentència:");
+                    System.out.println(sql);
+                    throw e;
+                }
+            }
+        }
+
+        System.out.println("Taules creades correctament.");
+    }
+
 
     public static void main(String[] args) {
 
         try (Connection connexio = Utils.getConnection()) {
             if (connexio != null && !connexio.isClosed()) {
                 System.out.println("Connexió establerta amb èxit a la BD DAM2!");
+
+                if (!existeixTaula(connexio, "PROFESSORS")) {
+                    executarCrud(connexio);
+                } else {
+                    System.out.println("Les taules ja existeixen.");
+                }
             }
-        } catch (SQLException e) {
-            System.err.println("Error en connectar amb la BD: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error en preparar la BD: " + e.getMessage());
         }
 
         Scanner input = new Scanner(System.in);
-
         int opcio1;
         int opcio2;
         boolean sortir = false;
+
+        ProfesorsView vistaProfessors = new ProfesorsView();
 
         while (!sortir) {
             System.out.println("\n--- MENU PRINCIPAL ---");
@@ -47,7 +94,7 @@ public class Main {
 
                         switch (opcio2) {
                             case 1:
-                                System.out.println("Alta de professors");
+                                vistaProfessors.demanaProfessor();
                                 break;
                             case 2:
                                 System.out.println("Llistar professors");
