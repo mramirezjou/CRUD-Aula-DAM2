@@ -10,6 +10,10 @@ public class Professor{
         this.nom = nom;
         this.cognom = cognom;
     }
+    public Professor(String nom, String cognom) {
+        this.nom = nom;
+        this.cognom = cognom;
+    }
     public String getNom() {
         return nom;
     }
@@ -24,5 +28,13 @@ public class Professor{
 
     public void setCognom(String cognom) {
         this.cognom = cognom;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
