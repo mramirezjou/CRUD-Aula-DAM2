@@ -1,25 +1,53 @@
 
 package org.ModelView;
 
-import org.Model.Professor;
-import org.ModelController.ProfesorsController;
+import org.Model.ModulsProfessionals;
+import org.ModelController.ModulsProfessionalsController;
 
 import java.util.Scanner;
 
-public class ProfesorsView {
+public class ModulsProfessionalsView {
 
     private Scanner input = new Scanner(System.in);
-    private ProfesorsController controller = new ProfesorsController();
+    private ModulsProfessionalsController controller = new ModulsProfessionalsController();
 
-    public void demanaProfessor() {
-        System.out.println("Introdueix el nom del professor:");
+    public void demanaModulsProfessionals() {
+        System.out.println("Introdueix el nom del modul:");
         String nom = input.nextLine();
 
-        System.out.println("Introdueix el cognom del professor:");
-        String cognom = input.nextLine();
+        System.out.println("Introdueix el id del professor:");
+        int id = input.nextInt();
 
-        Professor professor = new Professor(nom, cognom);
+        ModulsProfessionals modulsProfessionals = new ModulsProfessionals(nom, id);
 
-        controller.altaProfessor(professor);
+        controller.altaModul(modulsProfessionals);
+    }
+    public void eliminarModulsProfessionals() {
+        System.out.println("Introdueix el id del modul:");
+        int id = input.nextInt();
+
+        ModulsProfessionals modulsProfessionals = new ModulsProfessionals(id);
+
+        controller.baixaModul(modulsProfessionals);
+    }
+    public void consultarModulsProfessionals() {
+        ModulsProfessionals modulsProfessionals = new ModulsProfessionals();
+
+        controller.llegirModul(modulsProfessionals);
+    }
+    public void actualitzarModulsProfessionals() {
+        System.out.println("Introdueix el id del modul que vols actualitzar:");
+        int idModul = input.nextInt();
+        input.nextLine();
+
+        System.out.println("Introdueix el nom del modul:");
+        String nom = input.nextLine();
+
+        System.out.println("Introdueix el id del professor:");
+        int idProfessor = input.nextInt();
+
+        ModulsProfessionals modulsProfessionals = new ModulsProfessionals(idModul, nom, idProfessor);
+
+        controller.actualitzaModul(modulsProfessionals);
     }
 }
