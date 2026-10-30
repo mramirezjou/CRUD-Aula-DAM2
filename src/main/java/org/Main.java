@@ -2,6 +2,7 @@
 package org;
 
 import org.BD.Utils;
+import org.ModelView.ModulsProfessionalsView;
 import org.ModelView.ProfesorsView;
 
 import java.sql.Connection;
@@ -69,6 +70,7 @@ public class Main {
         boolean sortir = false;
 
         ProfesorsView vistaProfessors = new ProfesorsView();
+        ModulsProfessionalsView vistaModulsProfessionals = new ModulsProfessionalsView();
 
         while (!sortir) {
             System.out.println("\n--- MENU PRINCIPAL ---");
@@ -127,16 +129,16 @@ public class Main {
 
                         switch (opcio2) {
                             case 1:
-                                System.out.println("Alta de moduls professionals");
+                                vistaModulsProfessionals.demanaModulsProfessionals();
                                 break;
                             case 2:
-                                System.out.println("Llistar moduls professionals");
+                                vistaModulsProfessionals.consultarModulsProfessionals();
                                 break;
                             case 3:
-                                System.out.println("Actualitzar moduls professionals");
+                                vistaModulsProfessionals.actualitzarModulsProfessionals();
                                 break;
                             case 4:
-                                System.out.println("Eliminar moduls professionals");
+                                vistaModulsProfessionals.eliminarModulsProfessionals();
                                 break;
                             case 5:
                                 break;

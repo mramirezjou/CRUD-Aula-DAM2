@@ -1,14 +1,23 @@
 package org.ModelController;
 
-import org.Model.Professor;
-import org.ModelDAO.ProfessorDAO;
-import org.ModelDAOImpl.ProfessorDAOImpl;
+import org.Model.ModulsProfessionals;
+import org.ModelDAO.ModulsProfessionalsDAO;
+import org.ModelDAOImpl.ModulsProfessionalsDAOImpl;
 
-public class ProfesorsController {
+public class ModulsProfessionalsController {
 
-    private ProfessorDAO professorDAO = new ProfessorDAOImpl();
+    private final ModulsProfessionalsDAO modulsProfessionalsDAO = new ModulsProfessionalsDAOImpl();
 
-    public void altaProfessor(Professor professor) {
-        professorDAO.addDam2(professor);
+    public void altaModul(ModulsProfessionals modulsProfessionals) {
+        modulsProfessionalsDAO.addDam2(modulsProfessionals);
+    }
+    public void baixaModul(ModulsProfessionals modulsProfessionals) {
+        modulsProfessionalsDAO.deleteDam2(modulsProfessionals);
+    }
+    public void actualitzaModul(ModulsProfessionals modulsProfessionals) {
+        modulsProfessionalsDAO.updateDam2(modulsProfessionals);
+    }
+    public void llegirModul(ModulsProfessionals modulsProfessionals) {
+        modulsProfessionalsDAO.readDam2(modulsProfessionals);
     }
 }

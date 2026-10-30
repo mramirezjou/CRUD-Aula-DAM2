@@ -6,18 +6,21 @@ public class ModulsProfessionals {
     private String nom;
     private int id_professor;
 
-    public ModulsProfessionals(String nom, int id_professor) {
+    public ModulsProfessionals(int id , String nom, int id_professor) {
+        this.id = id;
         this.nom = nom;
         this.id_professor = id_professor;
     }
 
-    public int getId() {
-        return id;
+    public ModulsProfessionals(String nom, int id_professor) {
+        this.nom = nom;
+        this.id_professor = id_professor;
     }
-
-    public void setId(int id) {
+    public ModulsProfessionals(int id) {
         this.id = id;
     }
+
+    public ModulsProfessionals() {}
 
     public String getNom() {
         return nom;
@@ -34,4 +37,8 @@ public class ModulsProfessionals {
     public void setId_professor(int id_professor) {
         this.id_professor = id_professor;
     }
+    public int getId() {
+        return id;
+    }
+
 }
