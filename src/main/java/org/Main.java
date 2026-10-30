@@ -1,6 +1,7 @@
 
 package org;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.BD.Utils;
 import org.ModelView.ProfesorsView;
 
@@ -25,9 +26,19 @@ public class Main {
 
 
     public static void executarCrud(Connection connexio) throws Exception {
-        String script = Files.readString(
-                Path.of("src/main/java/org/BD/crud.sql")
-        );
+        Dotenv dotenv = Dotenv.load();
+        String dbType = dotenv.get("DB_TYPE");
+        String script="";
+        if(dbType.equals("oracle")){
+            script = Files.readString(
+                    Path.of("src/main/java/org/BD/crud.sql")
+            );
+        }else {
+            script = Files.readString(
+                    Path.of("src/main/java/org/BD/crudMysql.sql")
+            );
+        }
+
 
         for (String sql : script.split(";")) {
             sql = sql.trim();
