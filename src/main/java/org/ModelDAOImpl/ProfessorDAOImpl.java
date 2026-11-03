@@ -49,21 +49,26 @@ public class ProfessorDAOImpl implements ProfessorDAO {
             System.out.println("Error en eliminar el professor: " + e.getMessage());
         }
     }
-    public void updateDam2(Professor professor){
-        String sql = "UPDATE Professors SET nom = ?, cognoms = ? WHERE id_profesor = ?";
+    public void updateDam2(Professor professor) {
+        // Looks up the row WHERE nom = ?, and updates the cognoms
+        String sql = "UPDATE Professors SET cognoms = ? WHERE nom = ?";
+
         try (Connection con = Utils.getConnection()) {
             assert con != null;
             try (PreparedStatement ps = con.prepareStatement(sql)) {
 
-                ps.setString(1, professor.getNom());
-                ps.setString(2, professor.getCognom());
+                // Parameter 1 is the new value to SET
+                ps.setString(1, professor.getCognom());
+
+                // Parameter 2 is the condition to check in the WHERE clause
+                ps.setString(2, professor.getNom());
 
                 int files = ps.executeUpdate();
 
                 if (files > 0) {
                     System.out.println("Professor actualitzat correctament.");
                 } else {
-                    System.out.println("No s'ha trobat cap professor amb aquest id.");
+                    System.out.println("No s'ha trobat cap professor amb aquest nom: " + professor.getNom());
                 }
 
             }
